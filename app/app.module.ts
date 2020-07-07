@@ -13,6 +13,7 @@ import { baseURL } from "./shared/baseurl";
 import { DishService } from "./services/dish.service";
 import { ProcessHTTPMsgService } from "./services/process-httpmsg.service";
 import { DishdetailComponent } from "~/dishdetail/dishdetail.component";
+import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -20,7 +21,8 @@ import { DishdetailComponent } from "~/dishdetail/dishdetail.component";
     NativeScriptModule,
     AppRoutingModule,
     NativeScriptHttpModule,
-    HttpClientModule
+    HttpClientModule,
+    NativeScriptUISideDrawerModule
   ],
   declarations: [AppComponent, MenuComponent, DishdetailComponent],
   providers: [
