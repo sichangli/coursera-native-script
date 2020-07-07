@@ -6,38 +6,31 @@ import { AppComponent } from "./app.component";
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
-// Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { HttpClientModule } from "@angular/common/http";
 import { MenuComponent } from "./menu/menu.component";
 import { baseURL } from "./shared/baseurl";
 import { DishService } from "./services/dish.service";
 import { ProcessHTTPMsgService } from "./services/process-httpmsg.service";
+import { DishdetailComponent } from "~/dishdetail/dishdetail.component";
 
 @NgModule({
-    bootstrap: [
-        AppComponent
-    ],
-    imports: [
-        NativeScriptModule,
-        AppRoutingModule,
-        NativeScriptHttpModule,
-        HttpClientModule
-    ],
-    declarations: [
-        AppComponent,
-        MenuComponent
-    ],
-    providers: [
-        {provide: 'baseURL', useValue: baseURL},
-        DishService,
-        ProcessHTTPMsgService
-    ],
-    schemas: [
-        NO_ERRORS_SCHEMA
-    ]
+  bootstrap: [AppComponent],
+  imports: [
+    NativeScriptModule,
+    AppRoutingModule,
+    NativeScriptHttpModule,
+    HttpClientModule
+  ],
+  declarations: [AppComponent, MenuComponent, DishdetailComponent],
+  providers: [
+    { provide: "baseURL", useValue: baseURL },
+    DishService,
+    ProcessHTTPMsgService
+  ],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 /*
 Pass your application module to the bootstrapModule function located in main.ts to start your app
 */
-export class AppModule { }
+export class AppModule {}
