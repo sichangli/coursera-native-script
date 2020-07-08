@@ -1,7 +1,14 @@
-import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  ViewContainerRef
+} from "@angular/core";
 import { TextField } from "ui/text-field";
 import { Switch } from "ui/switch";
 import { Validators, FormBuilder, FormGroup } from "@angular/forms";
+import { ModalDialogOptions, ModalDialogService } from "nativescript-angular";
+import { ReservationModalComponent } from "~/reservationmodal/reservationmodal.component";
 
 @Component({
   selector: "app-reservation",
@@ -12,7 +19,11 @@ import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 export class ReservationComponent implements OnInit {
   reservation: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private modalService: ModalDialogService,
+    private vcRef: ViewContainerRef
+  ) {
     this.reservation = this.formBuilder.group({
       guests: 3,
       smoking: false,
@@ -45,5 +56,23 @@ export class ReservationComponent implements OnInit {
 
   onSubmit() {
     console.log(JSON.stringify(this.reservation.value));
+  }
+
+  createModalView(args) {
+    let options: ModalDialogOptions = {
+      viewContainerRef: this.vcRef,
+      context: args,
+      fullscreen: false
+    };
+
+    this.modalService
+      .showModal(ReservationModalComponent, options)
+      .then((result: any) => {
+        if (args === "guest") {
+          this.reservation.patchValue({ guests: result });
+        } else if (args === "date-time") {
+          this.reservation.patchValue({ dateTime: result });
+        }
+      });
   }
 }

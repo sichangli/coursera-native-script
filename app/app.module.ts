@@ -24,6 +24,7 @@ import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 import { FavoritesComponent } from "~/favorites/favorites.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ReservationComponent } from "~/reservation/reservation.component";
+import { ReservationModalComponent } from "~/reservationmodal/reservationmodal.component";
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -48,8 +49,10 @@ import { ReservationComponent } from "~/reservation/reservation.component";
     ContactComponent,
     AboutComponent,
     FavoritesComponent,
-    ReservationComponent
+    ReservationComponent,
+    ReservationModalComponent
   ],
+  entryComponents: [ReservationModalComponent],
   providers: [
     { provide: "baseURL", useValue: baseURL },
     DishService,
