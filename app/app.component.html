@@ -19,19 +19,29 @@
     <ScrollView row="1">
       <StackLayout class="sidedrawer-content">
         <GridLayout
-          columns="auto"
+          columns="*, auto"
           class="sidedrawer-list-item"
           [class.selected]="isComponentSelected('/home')"
           (tap)="onNavItemTap('/home')"
         >
+          <Label
+            col="0"
+            [text]="'fa-home' | fonticon"
+            class="sidedrawer-list-item-text fa"
+          ></Label>
           <Label col="1" text="Home" class="sidedrawer-list-item-text"></Label>
         </GridLayout>
         <GridLayout
-          columns="auto"
+          columns="*, auto"
           class="sidedrawer-list-item"
-          [class.selected]="isComponentSelected('/about')"
-          (tap)="onNavItemTap('/about')"
+          [class.selected]="isComponentSelected('/aboutus')"
+          (tap)="onNavItemTap('/aboutus')"
         >
+          <Label
+            col="0"
+            [text]="'fa-info-circle' | fonticon"
+            class="sidedrawer-list-item-text fa"
+          ></Label>
           <Label
             col="1"
             text="About Us"
@@ -39,19 +49,29 @@
           ></Label>
         </GridLayout>
         <GridLayout
-          columns="auto"
+          columns="*, auto"
           class="sidedrawer-list-item"
           [class.selected]="isComponentSelected('/menu')"
           (tap)="onNavItemTap('/menu')"
         >
+          <Label
+            col="0"
+            [text]="'fa-list' | fonticon"
+            class="sidedrawer-list-item-text fa"
+          ></Label>
           <Label col="1" text="Menu" class="sidedrawer-list-item-text"></Label>
         </GridLayout>
         <GridLayout
-          columns="auto"
+          columns="*, auto"
           class="sidedrawer-list-item"
-          [class.selected]="isComponentSelected('/contact')"
-          (tap)="onNavItemTap('/contact')"
+          [class.selected]="isComponentSelected('/contactus')"
+          (tap)="onNavItemTap('/contactus')"
         >
+          <Label
+            col="0"
+            [text]="'fa-address-card' | fonticon"
+            class="sidedrawer-list-item-text fa"
+          ></Label>
           <Label
             col="1"
             text="Contact Us"
