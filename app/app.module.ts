@@ -17,6 +17,8 @@ import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angul
 import { HomeComponent } from "~/home/home.component";
 import { PromotionService } from "~/services/promotion.service";
 import { LeaderService } from "~/services/leader.service";
+import { ContactComponent } from "~/contact/contact.component";
+import { AboutComponent } from "~/about/about.component";
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -31,7 +33,9 @@ import { LeaderService } from "~/services/leader.service";
     AppComponent,
     MenuComponent,
     DishdetailComponent,
-    HomeComponent
+    HomeComponent,
+    ContactComponent,
+    AboutComponent
   ],
   providers: [
     { provide: "baseURL", useValue: baseURL },
