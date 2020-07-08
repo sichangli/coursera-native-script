@@ -3,8 +3,7 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
 
-// Uncomment and add to NgModule imports if you need to use two-way binding
-// import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { HttpClientModule } from "@angular/common/http";
@@ -23,6 +22,8 @@ import { TNSFontIconModule } from "nativescript-ngx-fonticon";
 import { FavoriteService } from "~/services/favorite.service";
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 import { FavoritesComponent } from "~/favorites/favorites.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { ReservationComponent } from "~/reservation/reservation.component";
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -35,7 +36,9 @@ import { FavoritesComponent } from "~/favorites/favorites.component";
     NativeScriptUIListViewModule,
     TNSFontIconModule.forRoot({
       fa: "./fonts/font-awesome.min.css"
-    })
+    }),
+    NativeScriptFormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
@@ -44,7 +47,8 @@ import { FavoritesComponent } from "~/favorites/favorites.component";
     HomeComponent,
     ContactComponent,
     AboutComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    ReservationComponent
   ],
   providers: [
     { provide: "baseURL", useValue: baseURL },
