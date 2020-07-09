@@ -25,6 +25,7 @@ import { FavoritesComponent } from "~/favorites/favorites.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ReservationComponent } from "~/reservation/reservation.component";
 import { ReservationModalComponent } from "~/reservationmodal/reservationmodal.component";
+import { CommentComponent } from "~/comment/comment.component";
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -50,9 +51,10 @@ import { ReservationModalComponent } from "~/reservationmodal/reservationmodal.c
     AboutComponent,
     FavoritesComponent,
     ReservationComponent,
-    ReservationModalComponent
+    ReservationModalComponent,
+    CommentComponent
   ],
-  entryComponents: [ReservationModalComponent],
+  entryComponents: [ReservationModalComponent, CommentComponent],
   providers: [
     { provide: "baseURL", useValue: baseURL },
     DishService,
