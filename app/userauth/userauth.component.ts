@@ -1,12 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { Page } from "ui/page";
-import { Validators, FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { getString, setString } from "application-settings";
 import { RouterExtensions } from "nativescript-angular/router";
 import * as camera from "nativescript-camera";
 import { Image } from "ui/image";
 import * as app from "application";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
+import * as imagepicker from "nativescript-imagepicker";
+import { ImagePickerMediaType } from "nativescript-imagepicker";
 
 @Component({
   moduleId: module.id,
@@ -58,6 +60,25 @@ export class UserAuthComponent implements OnInit {
         })
         .catch(err => console.log("Error -> " + err.message));
     }
+  }
+
+  getFromLibrary() {
+    const imageOptions: imagepicker.Options = {
+      mode: "single",
+      mediaType: ImagePickerMediaType.Image
+    };
+    const picker = imagepicker.create(imageOptions);
+    picker
+      .authorize()
+      .then(() => {
+        console.log("Image picker authorized");
+        return picker.present();
+      })
+      .then(images => {
+        let image = <Image>this.page.getViewById<Image>("myPicture");
+        image.src = images[0];
+      })
+      .catch(err => console.log("Error -> " + err.message));
   }
 
   register() {
