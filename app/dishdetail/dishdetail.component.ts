@@ -209,13 +209,18 @@ export class DishdetailComponent implements OnInit {
       });
   }
 
-  // socialShare() {
-  //   let image: ImageSource;
-  //   fromUrl(this.baseURL + this.dish.image)
-  //       .then((img: ImageSource) => {
-  //         image = img;
-  //         SocialShare.shareImage(image, "How would you like to share this image?")
-  //       })
-  //       .catch(()=> { console.log('Error loading image'); });
-  // }
+  socialShare() {
+    let image: ImageSource;
+    fromUrl(this.baseURL + this.dish.image)
+      .then((img: ImageSource) => {
+        image = img;
+        SocialShare.shareImage(
+          image,
+          "How would you like to share this image?"
+        );
+      })
+      .catch(() => {
+        console.log("Error loading image");
+      });
+  }
 }
