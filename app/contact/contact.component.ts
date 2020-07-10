@@ -31,6 +31,11 @@ export class ContactComponent {
   }
 
   callRestaurant() {
-    Phone.dial("+852 1234 5678", true);
+    const phoneNumber = "+852 1234 5678";
+    Phone.requestCallPermission(
+      "You should accept the permission to be able to make a direct phone call."
+    )
+      .then(() => Phone.dial(phoneNumber, false))
+      .catch(() => Phone.dial(phoneNumber, true));
   }
 }
