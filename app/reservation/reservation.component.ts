@@ -1,16 +1,15 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectorRef,
-  ViewContainerRef
-} from "@angular/core";
+import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { TextField } from "ui/text-field";
 import { Switch } from "ui/switch";
-import { Validators, FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ModalDialogOptions, ModalDialogService } from "nativescript-angular";
 import { ReservationModalComponent } from "~/reservationmodal/reservationmodal.component";
 import * as app from "application";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
+import { Page } from "ui/page";
+import { View } from "ui/core/view";
+import * as enums from "ui/enums";
+import { CouchbaseService } from "~/services/couchbase.service";
 
 @Component({
   selector: "app-reservation",
@@ -20,11 +19,16 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 })
 export class ReservationComponent implements OnInit {
   reservation: FormGroup;
+  isSubmitted = false;
+  formView: View;
+  submittedView: View;
 
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalDialogService,
-    private vcRef: ViewContainerRef
+    private vcRef: ViewContainerRef,
+    private page: Page,
+    private couchbaseService: CouchbaseService
   ) {
     this.reservation = this.formBuilder.group({
       guests: 3,
@@ -58,6 +62,47 @@ export class ReservationComponent implements OnInit {
 
   onSubmit() {
     console.log(JSON.stringify(this.reservation.value));
+    this.animate();
+    this.saveReservation();
+  }
+
+  animate() {
+    this.formView = this.page.getViewById<View>("formView");
+    this.submittedView = this.page.getViewById<View>("submittedView");
+    this.formView
+      .animate({
+        scale: { x: 0, y: 0 },
+        opacity: 0,
+        duration: 500,
+        curve: enums.AnimationCurve.easeIn
+      })
+      .then(() => {
+        this.isSubmitted = true;
+        this.submittedView
+          .animate({
+            translate: { x: 0, y: 0 },
+            scale: { x: 1, y: 1 },
+            opacity: 1,
+            duration: 500,
+            curve: enums.AnimationCurve.easeIn
+          })
+          .then(() => {
+            console.log("animation done");
+          });
+      });
+  }
+
+  saveReservation() {
+    const docId = "reservations";
+    let doc = this.couchbaseService.getDocument(docId);
+    if (doc == null) {
+      doc = { reservations: [this.reservation.value] };
+      this.couchbaseService.createDocument(doc, docId);
+    } else {
+      doc.reservations.push(this.reservation.value);
+      this.couchbaseService.updateDocument(docId, doc);
+    }
+    console.log("doc: ", doc);
   }
 
   createModalView(args) {

@@ -21,12 +21,14 @@
   >
   </ActionItem>
 </ActionBar>
-<ScrollView orientation="vertical" tkMainContent class="page">
+<StackLayout orientation="vertical" class="page">
   <GridLayout
+    id="formView"
     class="m-5"
     rows="auto auto auto auto"
     columns="*, *"
     [formGroup]="reservation"
+    [visibility]="!isSubmitted ? 'visible' : 'collapsed'"
   >
     <Label
       class="h3 m-15"
@@ -87,4 +89,55 @@
       (tap)="onSubmit()"
     ></Button>
   </GridLayout>
-</ScrollView>
+
+  <GridLayout
+    id="submittedView"
+    class="m-5"
+    rows="auto auto auto"
+    columns="*, *"
+    [visibility]="isSubmitted ? 'visible' : 'collapsed'"
+  >
+    <Label
+      class="h3 m-15"
+      row="0"
+      col="0"
+      text="No. of Guests"
+      textWrap="true"
+    ></Label>
+    <Label
+      class="h3 m-15"
+      row="0"
+      col="1"
+      textWrap="true"
+      [text]="reservation.value.guests"
+    ></Label>
+    <Label
+      class="h3 m-15"
+      row="1"
+      col="0"
+      text="Smoking?"
+      textWrap="true"
+    ></Label>
+    <Label
+      class="h3 m-15"
+      row="1"
+      col="1"
+      textWrap="true"
+      [text]="reservation.value.smoking"
+    ></Label>
+    <Label
+      class="h3 m-15"
+      row="2"
+      col="0"
+      text="Date and Time"
+      textWrap="true"
+    ></Label>
+    <Label
+      class="h3 m-15"
+      row="2"
+      col="1"
+      textWrap="true"
+      [text]="reservation.value.dateTime | date: 'medium'"
+    ></Label>
+  </GridLayout>
+</StackLayout>
